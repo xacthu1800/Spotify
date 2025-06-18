@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View, PressableProps } from 'react-native';
-import { clsx } from 'clsx';
+
 
 type Variant = 'primary' | 'secondary' | 'text' | 'navigation' | 'action' | 'pill';
 type PillVariant = 'greydark' | 'darkgrey';
@@ -23,27 +23,26 @@ const Buttons: React.FC<ButtonsProps> = ({
 }) => {
   const baseStyle = "rounded-full px-4 py-2 flex-row justify-center items-center";
 
-  const variantStyles = {
-    primary: "bg-colors-primary text-black",
-    secondary: "bg-colors-dark border-white text-white",
-    text: "bg-colors-dark border-none text-white",
-    navigation: "bg-colors-greys-0 p-2",
-    action: "bg-transparent p-2",
-    pill: {
-      greydark: "bg-gray-400 text-black font-semibold",
-      darkgrey: "bg-gray-900 text-white font-normal",
-    },
-  };
+const variantStyles = {
+  primary: "bg-primary font-bold",
+  secondary: "bg-primary-dark border font-bold border-white text-white",
+  text: "bg-dark font-bold text-white", 
+  navigation: "bg-greys-0 font-bold p-2", 
+  action: "bg-transparent font-bold p-2",
+  pill: {
+    greydark: "bg-gray-400 text-black font-bold ",
+    darkgrey: "bg-gray-900 text-white font-bold ",
+  },
+}
+
 
   const variantClass = variant === 'pill'
     ? variantStyles.pill[pillType]
     : variantStyles[variant];
 
-  const appliedStyle = clsx(baseStyle, variantClass);
-
   return (
     <Pressable
-      className={appliedStyle}
+      className={`${baseStyle} ${variantClass}`}
       onPress={() => console.log('Pressed')}
       style={({ pressed }) => ({
         opacity: pressed ? 0.7 : 1,
@@ -51,7 +50,7 @@ const Buttons: React.FC<ButtonsProps> = ({
       {...props}
     >
       {icon && <View className="mr-2">{icon}</View>}
-      {!iconOnly && <Text className="text-base">{title}</Text>}
+      {!iconOnly && <View >{title}</View>}
     </Pressable>
   );
 };
