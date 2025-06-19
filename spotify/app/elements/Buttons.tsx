@@ -24,7 +24,7 @@ const Buttons: React.FC<ButtonsProps> = ({
     primary: "bg-primary ",
     secondary: "bg-primary-dark border rounded-full border-white",
     text:"bg-transparent",
-    icon: "bg-transparent p-0",
+    icon: "bg-transparent p-0 scale-150",
     pill: "bg-primary-light border rounded-full ",
   }
 

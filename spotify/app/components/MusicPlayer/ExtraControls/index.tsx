@@ -22,13 +22,6 @@ const ExtraControls: React.FC<ExtraControlsProps> = ({
                     className='w-full h-full object-cover rounded-md'
                 />
                 </View>
-            <View className='flex-col  ml-3 mr-3'>
-                <Buttons title='song Name' variant='text' />
-                <Buttons title='album' variant='text' />
-                </View>
-            <View className='items-center'>
-                <Buttons icon={<AntDesign name="hearto" size={24} color="black" />} variant='icon' />
-            </View>
         </View>
     )
 }
