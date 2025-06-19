@@ -2,15 +2,13 @@ import React from 'react';
 import { Pressable, Text, View, PressableProps } from 'react-native';
 
 
-type Variant = 'primary' | 'secondary' | 'text' | 'navigation' | 'action' | 'pill';
-type PillVariant = 'greydark' | 'darkgrey';
+type Variant = 'primary' | 'secondary' | 'text' |'icon' | 'pill';
 
 interface ButtonsProps extends PressableProps {
   title?: string;
   variant?: Variant;
   icon?: React.ReactNode;
   iconOnly?: boolean;
-  pillType?: PillVariant;
 }
 
 const Buttons: React.FC<ButtonsProps> = ({
@@ -18,39 +16,44 @@ const Buttons: React.FC<ButtonsProps> = ({
   variant = 'primary',
   icon,
   iconOnly = false,
-  pillType = 'greydark',
   ...props
 }) => {
-  const baseStyle = "rounded-full px-4 py-2 flex-row justify-center items-center";
+  const baseStyle = "rounded-full px-4 py-2 flex-row justify-center ";
 
-const variantStyles = {
-  primary: "bg-primary font-bold",
-  secondary: "bg-primary-dark border font-bold border-white text-white",
-  text: "bg-dark font-bold text-white", 
-  navigation: "bg-greys-0 font-bold p-2", 
-  action: "bg-transparent font-bold p-2",
-  pill: {
-    greydark: "bg-gray-400 text-black font-bold ",
-    darkgrey: "bg-gray-900 text-white font-bold ",
-  },
-}
+  const variantClass = {
+    primary: "bg-primary ",
+    secondary: "bg-primary-dark border rounded-full border-white",
+    text:"bg-transparent",
+    icon: "bg-transparent p-0",
+    pill: "bg-primary-light border rounded-full ",
+  }
 
+  const textClass = {
+    primary: "text-primary-dark px-6 font-bold",
+    secondary: "text-primary-light px-6 font-semibold",
+    text:"text-primary-light font-bold",
+    icon: "",
+    pill: "text-primary-dark font-bold px-4",
+  }
 
-  const variantClass = variant === 'pill'
-    ? variantStyles.pill[pillType]
-    : variantStyles[variant];
+  const variantStyle = variantClass[variant] ;
+  const textStyle = textClass[variant];
 
   return (
     <Pressable
-      className={`${baseStyle} ${variantClass}`}
+      className={`${baseStyle} ${variantStyle}`}
       onPress={() => console.log('Pressed')}
       style={({ pressed }) => ({
         opacity: pressed ? 0.7 : 1,
       })}
       {...props}
     >
-      {icon && <View className="mr-2">{icon}</View>}
-      {!iconOnly && <View >{title}</View>}
+      {<View>
+          <Text className={`text-base ${textStyle}`}>
+            {title} {icon}
+          </Text>
+        </View>}
+      
     </Pressable>
   );
 };
