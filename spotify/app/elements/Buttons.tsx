@@ -32,7 +32,7 @@ const Buttons: React.FC<ButtonsProps> = ({
     primary: "text-primary-dark px-6 font-bold",
     secondary: "text-primary-light px-6 font-semibold",
     text:"text-primary-light font-bold",
-    icon: "",
+    icon: "p-0",
     pill: "text-primary-dark font-bold px-4",
   }
 
@@ -50,7 +50,7 @@ const Buttons: React.FC<ButtonsProps> = ({
     >
       {<View>
           <Text className={`text-base ${textStyle}`}>
-            {title} {icon}
+            {title || icon} 
           </Text>
         </View>}
       
